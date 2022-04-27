@@ -26,7 +26,7 @@ def initial_get():
     return jsonify(response)
 
 
-@app.route('/prediccion', methods=['GET', 'POST'])
+@app.route('/prediccion', methods=['GET', 'POST', 'PUT'])
 def call_predict():
     return get_predict_data(request)
 

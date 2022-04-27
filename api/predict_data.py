@@ -16,7 +16,7 @@ def get_predict_data(request: Request):
         'status': 200
     }
 
-    print(request)
+    print(request.get_json())
 
     #result = loaded_model.score(X_test, Y_test)
 
