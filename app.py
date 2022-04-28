@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask import jsonify
 from config import config
 
-from api.predict_data import get_predict_data
+from api.predict_data import get_predict_data_post, get_predict_data
 
 
 def create_app(enviroment):
@@ -26,9 +26,11 @@ def initial_get():
     return jsonify(response)
 
 
-@app.route('/prediccion', methods=['GET', 'POST', 'PUT'])
+@app.route('/prediccion', methods=['GET', 'POST'])
 def call_predict():
-    return get_predict_data(request)
+    if request.method == 'POST':
+        return get_predict_data_post(request)
+    return get_predict_data()
 
 
 if __name__ == '__main__':

@@ -1,23 +1,29 @@
 import os
 import joblib
-from flask import Request, jsonify
+from flask import Request, jsonify, Response
+import pandas
 
 
+# cargamos la ruta donde está almacenado el modelo de adultos
 RELATIVE_PATH = '/models/model_adultos.pkl'
+ABSOLUTE_PATH = os.getcwd()
+MODEL_PATH = ABSOLUTE_PATH + RELATIVE_PATH
 
-absolute_path = os.getcwd()
-model_path = absolute_path + RELATIVE_PATH
-# load the model from disk
-loaded_model = joblib.load(open(model_path, 'rb'))
+# cargamos el modelo de adultos
+loaded_model = joblib.load(open(MODEL_PATH, 'rb'))
 
 
-def get_predict_data(request: Request):
-    response = {
-        'status': 200
-    }
+def get_predict_data_post(request: Request):
+    file_uploaded = request.files["file"]
+    data_base_submitted = pandas.read_csv(file_uploaded)
 
-    print(request.get_json())
+    test_data = data_base_submitted.drop(['life_satisfaction'], axis=1)
 
-    #result = loaded_model.score(X_test, Y_test)
+    prediccion = loaded_model.predict(test_data)
+    result_prediccion = pandas.Series(prediccion)
 
-    return jsonify(response)
+    return result_prediccion.to_json(orient="index")
+
+
+def get_predict_data():
+    return Response('La peticion se debe realizar con el metodo POST', status=400,)
