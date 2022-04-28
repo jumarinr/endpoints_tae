@@ -31,7 +31,3 @@ def call_predict():
     if request.method == 'POST':
         return get_predict_data_post(request)
     return get_predict_data()
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
