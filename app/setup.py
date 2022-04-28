@@ -11,5 +11,6 @@ setup(
         'sklearn',
         'pandas',
         'joblib',
+        'gunicorn',
     ],
 )
