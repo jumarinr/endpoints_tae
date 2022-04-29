@@ -32,6 +32,7 @@ def initial_get():
 
 
 @app.route('/prediccion', methods=['GET', 'POST'])
+@cross_origin()
 def call_predict():
     if request.method == 'POST':
         return get_predict_data_post(request)
