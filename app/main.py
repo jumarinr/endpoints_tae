@@ -4,6 +4,8 @@ from config import config
 
 from api.predict_data import get_predict_data_post, get_predict_data
 
+from flask_cors import CORS, cross_origin
+
 
 def create_app(enviroment):
     app = Flask(__name__)
@@ -14,9 +16,12 @@ def create_app(enviroment):
 
 enviroment = config['development']
 app = create_app(enviroment)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/', methods=['GET'])
+@cross_origin()
 def initial_get():
     response = {
         'message': 'Endpoint para consumir la predicción del nivel de satifacción del usuario',
