@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 
 def create_app(enviroment):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(enviroment)
 
     return app
@@ -16,7 +17,6 @@ def create_app(enviroment):
 
 enviroment = config['development']
 app = create_app(enviroment)
-cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
