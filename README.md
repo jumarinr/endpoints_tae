@@ -13,7 +13,7 @@
             <li>isAbuelo: modelo de datos a predecir</li>
           </ul>
       </li>
-      <p>Para obtener la plantilla del módelo se puede consultar en el siguiente enlace: https://prediction-satisfaction.herokuapp.com/ </p>
+      <p>Para obtener la plantilla del modelo se puede consultar en el siguiente enlace: https://prediction-satisfaction.herokuapp.com/ </p>
     </ul>
   </li>
   <li>/ -> Servicio GET </li>
