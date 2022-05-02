@@ -1,8 +1,8 @@
 import os
-from xmlrpc.client import Boolean
 import joblib
 from flask import Request, Response
 import pandas
+import numpy
 
 ABSOLUTE_PATH = os.getcwd()
 
@@ -23,7 +23,6 @@ MODELO_KIDS = joblib.load(open(MODEL_PATH_KIDS, 'rb'))
 
 def get_predict_data_post(request: Request):
     # extraemos los datos de la petición
-    print("ingresa")
     file_uploaded = request.files["file"]
     print(file_uploaded)
     is_abuelo = request.form.get('isAbuelo')
@@ -33,11 +32,12 @@ def get_predict_data_post(request: Request):
     model_to_use = MODELO_ABUELOS if is_abuelo == True else MODELO_KIDS
 
     # definimos la data de prueba
-    test_data = pandas.read_csv(file_uploaded, sep=r",|;")
+    test_data = pandas.read_csv(file_uploaded, sep=r",|;", engine='python')
 
     # definimos la predicción
     prediccion = model_to_use.predict(test_data)
     result_prediccion = pandas.Series(prediccion)
+    result_prediccion = result_prediccion.astype(numpy.int64)
 
     # retornamos los datos
     return result_prediccion.to_json(orient="table")
