@@ -3,6 +3,7 @@ from flask import jsonify
 from config import config
 
 from api.predict_data import get_predict_data_post, get_predict_data
+from api.predict_risk import get_risk_data_post, get_risk_data_get
 
 from flask_cors import CORS, cross_origin
 
@@ -37,3 +38,11 @@ def call_predict():
     if request.method == 'POST':
         return get_predict_data_post(request)
     return get_predict_data()
+
+
+@app.route('/prediccion-model-risk', methods=['GET', 'POST'])
+@cross_origin()
+def call_predict_risk():
+    if request.method == 'POST':
+        return get_risk_data_post(request)
+    return get_risk_data_get()

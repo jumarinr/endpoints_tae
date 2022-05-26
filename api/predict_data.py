@@ -24,7 +24,6 @@ MODELO_KIDS = joblib.load(open(MODEL_PATH_KIDS, 'rb'))
 def get_predict_data_post(request: Request):
     # extraemos los datos de la petición
     file_uploaded = request.files["file"]
-    print(file_uploaded)
     is_abuelo = request.form.get('isAbuelo')
     is_abuelo = True if is_abuelo == 'true' else False
 
