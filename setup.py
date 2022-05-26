@@ -13,5 +13,6 @@ setup(
         'joblib',
         'gunicorn',
         'flask_cors',
+        'optbinning'
     ],
 )
