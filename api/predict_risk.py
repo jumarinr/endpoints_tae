@@ -29,10 +29,12 @@ def get_risk_data_post(request: Request):
     # definimos la data de prueba
     test_data = pandas.read_csv(file_uploaded, sep=r",|;", engine='python')
 
+    print(test_data)
+
     prediccion = pickle_model.score(test_data)
 
     result_prediccion = pandas.Series(prediccion)
-    result_prediccion = result_prediccion.astype(numpy.float64)
+    result_prediccion = result_prediccion.astype(numpy.int64)
 
     return result_prediccion.to_json(orient="table")
 
